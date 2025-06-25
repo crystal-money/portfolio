@@ -1,0 +1,14 @@
+version: 2.0
+shards:
+  ameba:
+    git: https://github.com/crystal-ameba/ameba.git
+    version: 1.6.4
+
+  money:
+    git: https://github.com/crystal-money/money.git
+    version: 2.0.0-dev+git.commit.d63f65143f3a9fdc9a0df2d6bff58e69681383b6
+
+  tallboy:
+    git: https://github.com/epoch/tallboy.git
+    version: 0.9.3
+

@@ -1,0 +1,25 @@
+name: portfolio
+version: 0.1.0
+
+authors:
+  - Sijawusz Pur Rahnama <sija@sija.pl>
+
+dependencies:
+  money:
+    github: crystal-money/money
+    branch: master
+  tallboy:
+    github: epoch/tallboy
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 1.6.4
+
+targets:
+  portfolio:
+    main: src/cli.cr
+
+crystal: '~> 1.16.2'
+
+license: MIT
