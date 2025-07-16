@@ -50,8 +50,10 @@ module Portfolio
 
       Dir.mkdir_p(currency_rates_filepath.dirname)
 
-      data =
-        Data.new(config_path.not_nil!) # ameba:disable Lint/NotNil
+      # ameba:disable Lint/NotNil
+      data = File.open(config_path.not_nil!) do |file|
+        Data.from_yaml(file)
+      end
 
       setup_defaults(data)
 
@@ -60,14 +62,15 @@ module Portfolio
     end
 
     protected def setup_defaults(data : Data) : Nil
-      Money.default_currency = data.currency
-
-      Money.default_rate_store =
-        Money::Currency::RateStore::File.new(
-          filepath: currency_rates_filepath,
-          ttl: data.currency_rates_ttl,
-        )
-      Money.default_rate_provider = data.rate_provider
+      Money.configure do |context|
+        context.default_currency = data.currency
+        context.default_rate_store =
+          Money::Currency::RateStore::File.new(
+            filepath: currency_rates_filepath,
+            ttl: data.currency_rates_ttl,
+          )
+        context.default_rate_provider = data.rate_provider
+      end
     end
   end
 end

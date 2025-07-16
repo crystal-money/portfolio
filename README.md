@@ -18,7 +18,7 @@ shards build -Dpreview_mt --release
 
 ```yaml
 rate_provider:
-  name: UniRate
+  name: UniRateAPI
   options:
     api_key: your-api-key
 

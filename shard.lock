@@ -6,7 +6,7 @@ shards:
 
   money:
     git: https://github.com/crystal-money/money.git
-    version: 2.0.0-dev+git.commit.d63f65143f3a9fdc9a0df2d6bff58e69681383b6
+    version: 2.0.0-dev+git.commit.e6ff0a5e09780e5794cc30cff9860a62279c7e02
 
   tallboy:
     git: https://github.com/epoch/tallboy.git

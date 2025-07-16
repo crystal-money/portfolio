@@ -1,3 +1,4 @@
+require "yaml"
 require "money"
 
 require "./ext/**"

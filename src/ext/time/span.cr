@@ -37,3 +37,13 @@ struct Time::Span
       raise ArgumentError.new "Invalid time span: #{string.inspect}"
   end
 end
+
+# Module for YAML (de)serialization of `Time::Span`.
+module Time::Span::Converter
+  def self.from_yaml(ctx : YAML::ParseContext, node : YAML::Nodes::Node) : Time::Span
+    unless node.is_a?(YAML::Nodes::Scalar)
+      node.raise "Expected scalar, not #{node.kind}"
+    end
+    Time::Span.parse(node.value)
+  end
+end
