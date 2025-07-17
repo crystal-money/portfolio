@@ -1,5 +1,5 @@
 require "yaml"
 require "money"
 
-require "./ext/**"
+require "./core_ext/**"
 require "./portfolio/*"
