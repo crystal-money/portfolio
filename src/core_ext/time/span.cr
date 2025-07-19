@@ -1,9 +1,9 @@
 struct Time::Span
   private PATTERN = %r{
-    ^(?:(?<days>\d+)(?:d|\s*days?),?\s*)?
+    (?:(?<days>\d+)(?:d|\s*days?),?\s*)?
     (?:(?<hours>\d+)(?:h|\s*hours?),?\s*)?
     (?:(?<minutes>\d+)(?:m|\s*min(?:utes?)?),?\s*)?
-    (?:(?<seconds>\d+)(?:s|\s*sec(?:onds?)?))?$
+    (?:(?<seconds>\d+)(?:s|\s*sec(?:onds?)?))?
   }ix
 
   # Parses a time span string into a `Time::Span`, or returns `nil` if the
@@ -20,7 +20,7 @@ struct Time::Span
   # ```
   def self.parse?(string : String) : Time::Span?
     return unless string = string.presence
-    return unless match = string.match(PATTERN)
+    return unless match = string.match_full(PATTERN)
     return unless match.size > 0
 
     Time::Span.new(
