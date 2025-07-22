@@ -20,6 +20,6 @@ targets:
   portfolio:
     main: src/cli.cr
 
-crystal: '~> 1.16.2'
+crystal: ~> 1.17
 
 license: MIT
