@@ -3,7 +3,7 @@ require "tallboy"
 
 module Portfolio
   class Renderer
-    def initialize(@data : Data, @io = STDOUT)
+    def initialize(@config : Config, @io = STDOUT)
     end
 
     def render : Nil
@@ -15,7 +15,7 @@ module Portfolio
           add "Exchanged (%s)" % Money.default_currency, align: :right
         end
         header
-        @data.assets.each do |asset|
+        @config.assets.each do |asset|
           row [
             asset.description.colorize(:white),
             "%s (%s)".colorize(:light_blue).to_s % {
@@ -28,7 +28,7 @@ module Portfolio
         end
         footer do
           cell "Total", span: 3
-          cell @data.assets_total.format(no_cents_if_whole: true).colorize(:light_red)
+          cell @config.assets_total.format(no_cents_if_whole: true).colorize(:light_red)
         end
       end
       @io.puts table.render

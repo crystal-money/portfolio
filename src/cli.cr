@@ -48,19 +48,19 @@ end
 Dir.mkdir_p(currency_rates_filepath.dirname)
 
 # ameba:disable Lint/NotNil
-data = File.open(config_path.not_nil!) do |file|
-  Portfolio::Data.from_yaml(file)
+config = File.open(config_path.not_nil!) do |file|
+  Portfolio::Config.from_yaml(file)
 end
 
 Money.configure do |context|
-  context.default_currency = data.currency
+  context.default_currency = config.currency
   context.default_rate_store =
     Money::Currency::RateStore::File.new(
       filepath: currency_rates_filepath,
-      ttl: data.currency_rates_ttl,
+      ttl: config.currency_rates_ttl,
     )
-  context.default_rate_provider = data.rate_provider
+  context.default_rate_provider = config.rate_provider
 end
 
-renderer = Portfolio::Renderer.new(data)
+renderer = Portfolio::Renderer.new(config)
 renderer.render

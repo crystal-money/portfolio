@@ -1,5 +1,5 @@
 module Portfolio
-  class Data
+  class Config
     include YAML::Serializable
 
     @[YAML::Field(converter: Money::Currency::RateProvider::Converter)]
