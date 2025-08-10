@@ -29,29 +29,34 @@ end
 
 option_parser.parse
 
-if clear_currency_rates_cache
-  Portfolio::Config.clear_currency_rates_cache!
-end
-
-unless config_path
+begin
   if clear_currency_rates_cache
-    exit(0)
-  else
-    STDERR.puts option_parser
-    exit(1)
+    Portfolio::Config.clear_currency_rates_cache!
   end
-end
 
-# ameba:disable Lint/NotNil
-config = File.open(config_path.not_nil!) do |file|
-  Portfolio::Config.from_yaml(file)
-end
+  unless config_path
+    if clear_currency_rates_cache
+      exit(0)
+    else
+      STDERR.puts option_parser
+      exit(1)
+    end
+  end
 
-Money.configure do |context|
-  context.default_currency = config.currency
-  context.default_rate_store = config.rate_store
-  context.default_rate_provider = config.rate_provider
-end
+  # ameba:disable Lint/NotNil
+  config = File.open(config_path.not_nil!) do |file|
+    Portfolio::Config.from_yaml(file)
+  end
 
-renderer = Portfolio::Renderer.new(config)
-renderer.render
+  Money.configure do |context|
+    context.default_currency = config.currency
+    context.default_rate_store = config.rate_store
+    context.default_rate_provider = config.rate_provider
+  end
+
+  renderer = Portfolio::Renderer.new(config)
+  renderer.render
+rescue ex
+  STDERR.puts "ERROR: #{ex.message}".colorize(:red)
+  exit(1)
+end
