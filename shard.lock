@@ -4,9 +4,13 @@ shards:
     git: https://github.com/crystal-ameba/ameba.git
     version: 1.6.4
 
+  baked_file_system:
+    git: https://github.com/schovi/baked_file_system.git
+    version: 0.11.0
+
   money:
     git: https://github.com/crystal-money/money.git
-    version: 2.0.0-dev+git.commit.e6ff0a5e09780e5794cc30cff9860a62279c7e02
+    version: 2.0.0-dev+git.commit.9666da3dffd43bf6edd31bec0032b63e346b93ba
 
   tallboy:
     git: https://github.com/epoch/tallboy.git
