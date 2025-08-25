@@ -1,43 +1,52 @@
-# portfolio [![CI](https://github.com/crystal-money/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/crystal-money/portfolio/actions/workflows/ci.yml) [![Releases](https://img.shields.io/github/release/crystal-money/portfolio.svg)](https://github.com/crystal-money/portfolio/releases) [![License](https://img.shields.io/github/license/crystal-money/portfolio.svg)](https://github.com/crystal-money/portfolio/blob/master/LICENSE)
+# Portfolio [![CI](https://github.com/crystal-money/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/crystal-money/portfolio/actions/workflows/ci.yml) [![Releases](https://img.shields.io/github/release/crystal-money/portfolio.svg)](https://github.com/crystal-money/portfolio/releases) [![License](https://img.shields.io/github/license/crystal-money/portfolio.svg)](https://github.com/crystal-money/portfolio/blob/master/LICENSE)
 
-Simple command line tool for tracking your assets.
+Simple command line tool for tracking your assets (metals, fiat and crypto).
 
 ## Installation
 
 ```sh
-git clone https://github.com/crystal-money/portfolio
+git clone https://github.com/crystal-money/portfolio.git
 cd portfolio
 
 shards install
-shards build -Dpreview_mt --release
+shards build --release
 ```
 
 ## Usage
 
 ### Example configuration file
 
+> [!NOTE]
+> Available rate providers can be found at <https://github.com/crystal-money/money/tree/master/src/money/currency/rate_provider>.
+
 ```yaml
 rate_provider:
-  name: UniRateAPI
+  name: Compound
   options:
-    api_key: your-api-key
+    providers:
+      - name: FloatRates
+      - name: UniRateAPI
+        options:
+          api_key: your-api-key
 
 currency_rates_ttl: 15 minutes
 currency: EUR
 
 assets:
-  -
-    amount: 10_000
+  - amount: 10_000.11
     currency: USD
-    description: Cash
-  -
-    amount: 13.37
+    description: Cash under the mattress
+
+  - amount: 13.37
     currency: BTC
-    description: Bitcoin in Wallet
+    description: Bitcoin in the wallet
+
+  - amount: 4107
+    currency: ETH
+    description: Ethereum investment
 ```
 
-> [!NOTE]
-> Available rate providers can be found at <https://github.com/crystal-money/money/tree/master/src/money/currency/rate_provider>.
+<img width="622" height="164" alt="Screenshot" src="https://github.com/user-attachments/assets/83ccd298-ebfa-4a7d-94f9-ad94fb822896" />
 
 ### Running
 
