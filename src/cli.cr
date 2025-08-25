@@ -16,6 +16,10 @@ option_parser = OptionParser.new do |parser|
   parser.on("-x", "--clear-cache", "Clear currency rates cache") do
     clear_currency_rates_cache = true
   end
+  parser.on("-v", "--version", "Print version") do
+    puts Portfolio::VERSION
+    exit(0)
+  end
   parser.on("-h", "--help", "Show this help") do
     puts parser
     exit(0)
