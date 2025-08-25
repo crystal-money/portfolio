@@ -1,4 +1,4 @@
-# portfolio
+# portfolio [![CI](https://github.com/crystal-money/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/crystal-money/portfolio/actions/workflows/ci.yml) [![Releases](https://img.shields.io/github/release/crystal-money/portfolio.svg)](https://github.com/crystal-money/portfolio/releases) [![License](https://img.shields.io/github/license/crystal-money/portfolio.svg)](https://github.com/crystal-money/portfolio/blob/master/LICENSE)
 
 Simple command line tool for tracking your assets.
 
