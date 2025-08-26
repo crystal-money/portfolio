@@ -58,8 +58,8 @@ begin
     context.default_rate_provider = config.rate_provider
   end
 
-  renderer = Portfolio::Renderer.new(config)
-  renderer.render
+  renderer = Portfolio::Renderer.new
+  renderer.render(config)
 rescue ex
   STDERR.puts "ERROR: #{ex.message}".colorize(:red)
   exit(1)
