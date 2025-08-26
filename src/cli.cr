@@ -25,7 +25,7 @@ option_parser = OptionParser.new do |parser|
     exit(0)
   end
   parser.invalid_option do |flag|
-    STDERR.puts "ERROR: #{flag} is not a valid option."
+    STDERR.puts "ERROR: #{flag} is not a valid option".colorize(:red)
     STDERR.puts parser
     exit(1)
   end
