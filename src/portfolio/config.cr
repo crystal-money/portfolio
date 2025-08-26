@@ -19,10 +19,14 @@ module Portfolio
     # Currency rate store to use.
     @[YAML::Field(ignore: true)]
     getter rate_store : Money::Currency::RateStore do
-      Money::Currency::RateStore::File.new(
-        filepath: CURRENCY_RATES_FILEPATH,
-        ttl: currency_rates_ttl,
-      )
+      if ttl = currency_rates_ttl
+        Money::Currency::RateStore::File.new(
+          filepath: CURRENCY_RATES_FILEPATH,
+          ttl: ttl,
+        )
+      else
+        Money::Currency::RateStore::Memory.new
+      end
     end
 
     # Rate provider used for currency exchange.
