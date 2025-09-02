@@ -40,6 +40,9 @@ module Portfolio
     # Currency used for asset values.
     getter currency : Money::Currency
 
+    # Name of the portfolio.
+    getter name : String?
+
     # Array of assets to track.
     getter assets : Array(Asset)
 

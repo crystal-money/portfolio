@@ -8,13 +8,17 @@ module Portfolio
 
     def render(config : Config) : Nil
       table = Tallboy.table do
-        columns do
-          add "Description"
-          add "Currency"
-          add "Value"
-          add "Exchanged (%s)" % Money.default_currency, align: :right
+        if name = config.name
+          header do
+            cell name, span: 4, align: :center
+          end
         end
-        header
+        header do
+          cell "Description"
+          cell "Currency"
+          cell "Value"
+          cell "Exchanged (%s)" % Money.default_currency, align: :right
+        end
         config.assets.each do |asset|
           row [
             asset.description.colorize(:white),
