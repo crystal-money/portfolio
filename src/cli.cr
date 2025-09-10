@@ -2,16 +2,22 @@ require "log"
 require "option_parser"
 require "./portfolio"
 
+DEFAULT_CONFIG_PATH =
+  Path["~", ".config", "portfolio", "config.yml"].expand(home: true)
+
 Log.setup_from_env
 
 clear_currency_rates_cache = false
-config_path = nil
+config_path =
+  if File.exists?(DEFAULT_CONFIG_PATH)
+    DEFAULT_CONFIG_PATH
+  end
 
 option_parser = OptionParser.new do |parser|
   parser.banner = "Usage: portfolio [arguments]"
 
   parser.on("-c PATH", "--config=PATH", "Path to config file") do |path|
-    config_path = Path[path]
+    config_path = Path[path].expand(home: true) if path.presence
   end
   parser.on("-x", "--clear-cache", "Clear currency rates cache") do
     clear_currency_rates_cache = true
@@ -33,23 +39,18 @@ end
 
 option_parser.parse
 
+unless config_path
+  abort option_parser
+end
+
 begin
-  if clear_currency_rates_cache
-    Portfolio::Config.clear_currency_rates_cache!
-  end
-
-  unless config_path
-    if clear_currency_rates_cache
-      exit(0)
-    else
-      STDERR.puts option_parser
-      exit(1)
-    end
-  end
-
   # ameba:disable Lint/NotNil
   config = File.open(config_path.not_nil!) do |file|
     Portfolio::Config.from_yaml(file)
+  end
+
+  if clear_currency_rates_cache
+    config.rate_store.clear
   end
 
   Money.configure do |context|
@@ -61,6 +62,5 @@ begin
   renderer = Portfolio::Renderer.new
   renderer.render(config)
 rescue ex
-  STDERR.puts "ERROR: #{ex.message}".colorize(:red)
-  exit(1)
+  abort "ERROR: #{ex.message}".colorize(:red)
 end

@@ -20,6 +20,12 @@ shards build --release
 > Available rate providers can be found at <https://github.com/crystal-money/money/tree/master/src/money/currency/rate_provider>.
 
 ```yaml
+rate_store:
+  name: File
+  options:
+    filepath: ~/.cache/portfolio/currency-rates.json
+    ttl: 15 minutes
+
 rate_provider:
   name: Compound
   options:
@@ -29,7 +35,6 @@ rate_provider:
         options:
           api_key: your-api-key
 
-currency_rates_ttl: 15 minutes
 currency: EUR
 
 assets:
