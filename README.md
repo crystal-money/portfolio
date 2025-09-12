@@ -37,6 +37,7 @@ rate_provider:
 
 currency: EUR
 
+# name: Retirement fund
 assets:
   - amount: 10_000.11
     currency: USD
