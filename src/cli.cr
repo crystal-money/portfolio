@@ -7,7 +7,7 @@ DEFAULT_CONFIG_PATH =
 
 Log.setup_from_env
 
-clear_currency_rates_cache = false
+clear_rate_store = false
 config_path =
   if File.exists?(DEFAULT_CONFIG_PATH)
     DEFAULT_CONFIG_PATH
@@ -20,7 +20,7 @@ option_parser = OptionParser.new do |parser|
     config_path = Path[path].expand(home: true) if path.presence
   end
   parser.on("-x", "--clear-cache", "Clear currency rates cache") do
-    clear_currency_rates_cache = true
+    clear_rate_store = true
   end
   parser.on("-v", "--version", "Print version") do
     puts Portfolio::VERSION
@@ -49,7 +49,7 @@ begin
     Portfolio::Config.from_yaml(file)
   end
 
-  if clear_currency_rates_cache
+  if clear_rate_store
     config.rate_store.clear
   end
 
