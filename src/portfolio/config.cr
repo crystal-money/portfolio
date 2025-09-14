@@ -2,15 +2,8 @@ module Portfolio
   class Config
     include YAML::Serializable
 
-    # Rate store used for currency exchange.
-    @[YAML::Field(converter: Money::Currency::RateStore::Converter)]
-    property rate_store : Money::Currency::RateStore do
-      Money.default_rate_store
-    end
-
-    # Rate provider used for currency exchange.
-    @[YAML::Field(converter: Money::Currency::RateProvider::Converter)]
-    property rate_provider : Money::Currency::RateProvider
+    # Currency exchange to use.
+    property exchange : Money::Currency::Exchange
 
     # Currency used for asset values.
     property currency : Money::Currency

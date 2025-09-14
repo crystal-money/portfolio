@@ -20,22 +20,23 @@ shards build --release
 > Available rate providers can be found at <https://github.com/crystal-money/money/tree/master/src/money/currency/rate_provider>.
 
 ```yaml
-rate_store:
-  name: File
-  options:
-    filepath: ~/.cache/portfolio/currency-rates.json
-    ttl: 15 minutes
-
-rate_provider:
-  name: Compound
-  options:
-    providers:
-      - name: FloatRates
-      - name: UniRateAPI
-        options:
-          api_key: your-api-key
-
 currency: EUR
+
+exchange:
+  rate_store:
+    name: File
+    options:
+      filepath: ~/.cache/portfolio/currency-rates.json
+      ttl: 15 minutes
+
+  rate_provider:
+    name: Compound
+    options:
+      providers:
+        - name: FloatRates
+        - name: UniRateAPI
+          options:
+            api_key: your-api-key
 
 # name: Retirement fund
 assets:
