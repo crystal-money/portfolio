@@ -23,7 +23,11 @@ option_parser = OptionParser.new do |parser|
     clear_rate_store = true
   end
   parser.on("-v", "--version", "Print version") do
-    puts Portfolio::VERSION
+    if Portfolio::GIT_SHA
+      puts "%s [%s]" % {Portfolio::VERSION, Portfolio::GIT_SHA}
+    else
+      puts Portfolio::VERSION
+    end
     exit(0)
   end
   parser.on("-h", "--help", "Show this help") do
