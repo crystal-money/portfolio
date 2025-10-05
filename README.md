@@ -26,7 +26,7 @@ exchange:
   rate_store:
     name: File
     options:
-      filepath: ~/.cache/portfolio/currency-rates.json
+      path: ~/.cache/portfolio/currency-rates.json
       ttl: 15 minutes
 
   rate_provider:
