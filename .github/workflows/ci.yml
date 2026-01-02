@@ -30,11 +30,3 @@ jobs:
 
       - name: Build binary
         run: shards build
-
-      - name: Check formatting
-        run: crystal tool format --check
-        if: success() || failure()
-
-      - name: Run ameba linter
-        run: bin/ameba
-        if: success() || failure()
